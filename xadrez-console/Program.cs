@@ -1,7 +1,5 @@
 ﻿using tabuleiro;
 
-Posicao P;
-P = new(3, 4);
+Tabuleiro tab = new(8,8);
 
-Console.WriteLine($"Posição: {P}");
 Console.ReadLine();
