@@ -1,4 +1,5 @@
 ﻿using tabuleiro;
+using xadrez;
 
 namespace xadrez_console
 {
@@ -6,10 +7,10 @@ namespace xadrez_console
     {
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
-            for (int i = 0; i < tab.linhas; i++)
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write( 8 - i + " ");
-                for (int j = 0; j < tab.colunas; j++)
+                for (int j = 0; j < tab.Colunas; j++)
                 {
                     if (tab.Peca(i, j) == null)
                     {
@@ -28,7 +29,7 @@ namespace xadrez_console
 
         public static void ImprimirPeca(Peca peca)
         {
-            if (peca.cor == Cor.Branca)
+            if (peca.Cor == Cor.Branca)
             {
                 Console.Write(peca);
             }
@@ -39,6 +40,14 @@ namespace xadrez_console
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string posicao = Console.ReadLine()!;
+            char coluna = posicao[0];
+            int linha = int.Parse(posicao[1] + "");
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }

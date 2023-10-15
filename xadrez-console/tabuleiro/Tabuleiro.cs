@@ -2,14 +2,14 @@
 {
     internal class Tabuleiro
     {
-        public int linhas { get; set; }
-        public int colunas { get; set; }
-        public Peca[,] pecas;
+        public int Linhas { get; set; }
+        public int Colunas { get; set; }
+        private readonly Peca[,] pecas;
 
         public Tabuleiro(int linhas, int colunas)
         {
-            this.linhas = linhas;
-            this.colunas = colunas;
+            Linhas = linhas;
+            Colunas = colunas;
             pecas = new Peca[linhas, colunas];
         }
 
@@ -20,7 +20,7 @@
 
         public Peca Peca(Posicao pos)
         {
-            return pecas[pos.linha, pos.coluna];
+            return pecas[pos.Linha, pos.Coluna];
         }
 
         public bool ExistePeca(Posicao pos)
@@ -35,13 +35,26 @@
             {
                 throw new TabuleiroException("Ja existe uma peça nessa posição!");
             }
-            pecas[pos.linha, pos.coluna] = peca;
-            peca.posicao = pos;
+            pecas[pos.Linha, pos.Coluna] = peca;
+            peca.Posicao = pos;
+        }
+
+        public Peca RetirarPeca(Posicao pos)
+        {
+            if (Peca(pos) == null)
+            {
+                return null;
+            }
+
+            Peca aux = Peca(pos);
+            aux.Posicao = null;
+            pecas[pos.Linha, pos.Coluna] = null;
+            return aux;
         }
 
         public bool PosicaoValida(Posicao pos)
         {
-            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= linhas)
+            if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Linhas)
             {
                 return false;
             }
